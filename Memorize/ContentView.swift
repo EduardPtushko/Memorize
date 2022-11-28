@@ -11,19 +11,49 @@ struct ContentView: View {
     @ObservedObject var viewModel: EmojiMemoryGame
     
     var body: some View {
-            ScrollView {
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
-                    ForEach(viewModel.cards) { card in
-                        CardView(card: card)
-                            .aspectRatio(2/3, contentMode: .fit)
-                            .onTapGesture {
-                                viewModel.choose(card)
-                            }
-                    }
+        VStack{
+            Grid{
+                GridRow {
+                    Text(viewModel.theme.name.capitalized)
+                        .font(.largeTitle)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.teal)
+                    Color.clear
+                              .gridCellUnsizedAxes([ .vertical])
+                    Text("Your score: ")
+                        .font(.title3)
+                        .foregroundColor(.gray)
+                    +   Text("\(viewModel.score)")
+                        .foregroundColor(.black.opacity(0.9))
+                        .font(.title2)
                 }
             }
-            .foregroundColor(.red)
-            .padding(.horizontal)
+            ScrollView {
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
+                        ForEach(viewModel.cards) { card in
+                            CardView(card: card)
+                                .aspectRatio(2/3, contentMode: .fit)
+                                .onTapGesture {
+                                    viewModel.choose(card)
+                                }
+                        }
+                    }
+                }
+                .foregroundColor(.red)
+            
+            Button("New Game") {
+                viewModel.newGame()
+            }
+            .padding()
+            .padding(.horizontal, 8)
+            .foregroundColor(.white)
+            .background {
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(.cyan.opacity(0.9))
+                    
+            }
+        }
+        .padding(.horizontal)
     }
 }
 
