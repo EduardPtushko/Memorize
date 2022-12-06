@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct EmojiMemoryGameView: View {
-    @ObservedObject var viewModel: EmojiMemoryGame
+    @ObservedObject var game: EmojiMemoryGame
     
     var body: some View {
         VStack{
             HStack {
-                Text(viewModel.theme.name.capitalized)
+                Text(game.theme.name.capitalized)
                     .font(.largeTitle)
                     .fontWeight(.semibold)
                     .foregroundColor(.teal)
@@ -23,27 +23,28 @@ struct EmojiMemoryGameView: View {
                 Text("Your score: ")
                     .font(.title3)
                     .foregroundColor(.gray)
-                +   Text("\(viewModel.score)")
+                +   Text("\(game.score)")
                     .foregroundColor(.black.opacity(0.9))
                     .font(.title2)
             }
             
-            
-            ScrollView {
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
-                    ForEach(viewModel.cards) { card in
+                AspectVGrid(items: game.cards, aspectRation: 2/3) { card in
+                    if !card.isFaceUp && card.isMatched{
+                        Rectangle()
+                            .opacity(0)
+                    } else {
                         CardView(card: card)
-                            .aspectRatio(2/3, contentMode: .fit)
+                            .padding(4)
                             .onTapGesture {
-                                viewModel.choose(card)
+                                game.choose(card)
                             }
                     }
                 }
-            }
-            .foregroundColor(.red)
-            
+                .foregroundColor(.red)
+//                .padding(.horizontal)
+           
             Button("New Game") {
-                viewModel.newGame()
+                game.newGame()
             }
             .padding()
             .padding(.horizontal, 8)
@@ -57,15 +58,6 @@ struct EmojiMemoryGameView: View {
     }
 }
 
-struct EmojiMemoryGameView_Previews: PreviewProvider {
-    static var previews: some View {
-        EmojiMemoryGameView(viewModel: EmojiMemoryGame(themeModel: ThemeModel()))
-            .preferredColorScheme(.light)
-        EmojiMemoryGameView(viewModel: EmojiMemoryGame(themeModel: ThemeModel()))
-            .preferredColorScheme(.dark)
-        
-    }
-}
 
 struct CardView: View {
     let card: EmojiMemoryGame.Card
@@ -78,12 +70,13 @@ struct CardView: View {
                 if card.isFaceUp {
                     shape.foregroundColor(.white)
                     shape.strokeBorder(lineWidth: DrawingConstants.lineWidth)
+                    Pie(startAngle: .degrees(0 - 90), endAngle: .degrees(110 - 90))
+                        .opacity(0.3)
+                        .padding(5)
+                        
                     Text(card.content)
                         .font(font(size: geometry.size))
-                } else if card.isMatched {
-                    shape.opacity(0)
-                }
-                else {
+                }  else {
                     shape.fill()
                 }
             }
@@ -97,7 +90,24 @@ struct CardView: View {
     private struct DrawingConstants {
         static let cornerRadius: CGFloat = 20
         static let lineWidth: CGFloat = 3
-        static let fontScale: CGFloat = 0.8
+        static let fontScale: CGFloat = 0.7
     }
     
+}
+
+
+struct EmojiMemoryGameView_Previews: PreviewProvider {
+   
+    
+    static var previews: some View {
+        let game = EmojiMemoryGame(themeModel: ThemeModel())
+        game.choose(game.cards.first!)
+        
+      return  EmojiMemoryGameView(game: game )
+            .preferredColorScheme(.light)
+        
+//        EmojiMemoryGameView(viewModel: EmojiMemoryGame(themeModel: ThemeModel()))
+//            .preferredColorScheme(.dark)
+        
+    }
 }
