@@ -9,26 +9,7 @@ import SwiftUI
 
 struct EmojiMemoryGameView: View {
     @ObservedObject var game: EmojiMemoryGame
-    @State private var dealt: Set<Int> = []
-    @Namespace private var gameNamespace
-    
-    private func deal(_ card: EmojiMemoryGame.Card) {
-        dealt.insert(card.id)
-    }
-    
-    private func isUndealt(_ card: EmojiMemoryGame.Card) -> Bool {
-        !dealt.contains(card.id)
-    }
-    
-    private func dealAnimation(for card: EmojiMemoryGame.Card) -> Animation {
-        var delay = 0.0
-        if  let index = game.cards.firstIndex(where: { $0.id == card.id}) {
-            delay = Double(index) * (CardConstants.totalDealDuration / Double(game.cards.count))
-        }
-       
-        return .easeInOut(duration: CardConstants.dealDuration).delay(delay)
-    }
-    
+  
     private func zIndex(of card: EmojiMemoryGame.Card) -> Double {
         -Double(
             game.cards.firstIndex(where: { $0.id == card.id}) ?? 0
@@ -36,48 +17,20 @@ struct EmojiMemoryGameView: View {
     }
     
     var body: some View {
-        ZStack(alignment: .bottom) {
-            VStack{
-                //            HStack {
-                //                Text(game.theme.name.capitalized)
-                //                    .font(.largeTitle)
-                //                    .fontWeight(.semibold)
-                //                    .foregroundColor(.teal)
-                //
-                //                Spacer()
-                //                Spacer()
-                //                Text("Your score: ")
-                //                    .font(.title3)
-                //                    .foregroundColor(.gray)
-                //                +   Text("\(game.score)")
-                //                    .foregroundColor(.black.opacity(0.9))
-                //                    .font(.title2)
-                //            }
-                
-                gameBody
-                HStack {
-                    shuffle
-                    Spacer()
-                    restart
-                    
-                }
-                .padding(.horizontal)
-                
-            }
-            deckBody
+        
+        VStack{
+            gameBody
         }
         .padding()
     }
     
     var gameBody: some View {
         AspectVGrid(items: game.cards, aspectRation: 2/3) { card in
-            if isUndealt(card) || !card.isFaceUp && card.isMatched{
+            if  !card.isFaceUp && card.isMatched{
                 Color.clear
             } else {
                 CardView(card: card)
                     .padding(4)
-                    .matchedGeometryEffect(id: card.id, in: gameNamespace)
-                    .transition(.asymmetric(insertion: .identity, removal: .scale).animation(.easeInOut(duration: 1)))
                     .zIndex(zIndex(of: card))
                     .onTapGesture {
                         withAnimation(.easeInOut(duration: 1)) {
@@ -102,45 +55,7 @@ struct EmojiMemoryGameView: View {
 
 
 extension EmojiMemoryGameView {
-    var deckBody: some View {
-        ZStack {
-            ForEach(game.cards.filter(isUndealt)) { card in
-                CardView(card: card)
-                    .matchedGeometryEffect(id: card.id, in: gameNamespace)
-                    .transition(.asymmetric(insertion: .opacity, removal: .identity).animation(.easeInOut(duration: 1)))
-                    .zIndex(zIndex(of: card))
-                
-            }
-        }
-        .foregroundColor(CardConstants.color)
-        .frame(width: CardConstants.undealtWidth, height: CardConstants.undealtHeight)
-        .onTapGesture {
-            for card in game.cards {
-            withAnimation(dealAnimation(for: card)) {
-                    deal(card)
-                
-                }
-                
-            }
-        }
-    }
-    var restart: some View {
-        Button("Restart") {
-            withAnimation {
-                game.restart()
-            }
-        }
-    }
-    var shuffle: some View {
-        Button {
-            withAnimation(.easeInOut(duration: 1)) {
-                game.shuffle()
-            }
-        } label: {
-            Text("Shuffle")
-        }
-    }
-    
+ 
     var newGameButton: some View {
         Button("New Game") {
             game.restart()
