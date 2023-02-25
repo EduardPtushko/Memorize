@@ -11,63 +11,48 @@ import SwiftUI
 class EmojiMemoryGame: ObservableObject {
     typealias Card = MemoryGame<String>.Card
     
-    @Published  var themeModel: ThemeModel
+    var palette: Palette
     @Published private var model: MemoryGame<String>
-    @Published var score = 0
-    var seenCards: [Card] = []
     
-    static func createMemoryGame(theme: ThemeModel.Theme) -> MemoryGame<String> {
-        var emojis = Array(Set(theme.emojis))
-        var numberOfPairs = theme.numberOfPairsOfCardsToShow
+    init(palette: Palette) {
+        self.palette = palette
+        self.model = EmojiMemoryGame.createMemoryGame(palette: palette)
+    }
+    
+    static func createMemoryGame(palette: Palette) -> MemoryGame<String> {
+        var emojis = Array(Set(palette.emojis))
+        var numberOfPairs = palette.numberPairsOfCardsToShow
         
-        if theme.numberOfPairsOfCardsToShow > emojis.count {
-            numberOfPairs = theme.emojis.count
+        if numberOfPairs > emojis.count {
+            numberOfPairs = palette.emojis.count
         }
         
-        if theme.numberOfPairsOfCardsToShow < emojis.count {
+        if numberOfPairs < emojis.count {
             emojis.shuffle()
         }
         
-       return  MemoryGame<String>(numberOfPairsOfCards: numberOfPairs ){ pairIndex in
+       return MemoryGame<String>(numberOfPairsOfCards: numberOfPairs ){ pairIndex in
            emojis[pairIndex]
         }
     }
     
-    init(themeModel: ThemeModel) {
-        self.themeModel = themeModel
-        self.model = EmojiMemoryGame.createMemoryGame(theme: themeModel.theme)
-    }
-    
-    
-    var theme: ThemeModel.Theme {
-        themeModel.theme
-    }
     
     var cards: Array<Card> {
         return model.cards
     }
     
-    func handleScore(_ card: Card) {
-        if seenCards.contains(where: {card.id == $0.id}) {
-            score -= 1
-        } else {
-            score += 2
-        }
-    }
-    
+  
     // MARK: - Intent(s)
     func choose(_ card: Card) {
         model.choose(card)
-        seenCards.append(card)
     }
     
     func shuffle() {
         model.shuffle()
     }
     
-    func restart() {
-        themeModel.newGame()
-        model = EmojiMemoryGame.createMemoryGame(theme: themeModel.theme)
+    func newGame() {
+        model = EmojiMemoryGame.createMemoryGame(palette: self.palette)
     }
     
 }

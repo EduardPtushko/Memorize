@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EmojiMemoryGameView: View {
     @ObservedObject var game: EmojiMemoryGame
-  
+    
     private func zIndex(of card: EmojiMemoryGame.Card) -> Double {
         -Double(
             game.cards.firstIndex(where: { $0.id == card.id}) ?? 0
@@ -17,11 +17,19 @@ struct EmojiMemoryGameView: View {
     }
     
     var body: some View {
-        
         VStack{
             gameBody
         }
         .padding()
+        .navigationTitle(game.palette.name)
+        .toolbar {
+            Button("New Game") {
+                withAnimation {
+                    game.newGame()
+                }
+            }
+            .padding(.trailing, 16)
+        }
     }
     
     var gameBody: some View {
@@ -30,6 +38,7 @@ struct EmojiMemoryGameView: View {
                 Color.clear
             } else {
                 CardView(card: card)
+                    .foregroundColor(game.palette.color)
                     .padding(4)
                     .zIndex(zIndex(of: card))
                     .onTapGesture {
@@ -39,8 +48,6 @@ struct EmojiMemoryGameView: View {
                     }
             }
         }
-        .foregroundColor(.red)
-        
     }
     
     private struct CardConstants {
@@ -50,23 +57,6 @@ struct EmojiMemoryGameView: View {
         static let totalDealDuration: Double = 2
         static let undealtHeight: CGFloat = 90
         static let undealtWidth = undealtHeight * aspectRation
-    }
-}
-
-
-extension EmojiMemoryGameView {
- 
-    var newGameButton: some View {
-        Button("New Game") {
-            game.restart()
-        }
-        .padding()
-        .padding(.horizontal, 8)
-        .foregroundColor(.white)
-        .background {
-            RoundedRectangle(cornerRadius: 8)
-                .fill(.cyan.opacity(0.9))
-        }
     }
 }
 
@@ -113,17 +103,16 @@ struct CardView: View {
         static let fontScale: CGFloat = 0.7
         static let fontSize: CGFloat = 32
     }
-    
 }
 
 
 struct EmojiMemoryGameView_Previews: PreviewProvider {
-    static let game = EmojiMemoryGame(themeModel: ThemeModel())
+    static let game = EmojiMemoryGame(palette: PaletteStore().palettes[1])
     //        game.choose(game.cards.first!)
     static var previews: some View {
         
         
-        VStack{
+        NavigationStack {
             EmojiMemoryGameView(game: game )
                 .preferredColorScheme(.light)
         }

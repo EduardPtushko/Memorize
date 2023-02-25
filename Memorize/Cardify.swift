@@ -40,9 +40,7 @@ struct Cardify: Animatable, ViewModifier {
     private struct DrawingConstants {
         static let cornerRadius: CGFloat = 20
         static let lineWidth: CGFloat = 3
-        
     }
-    
 }
 
 extension View {
