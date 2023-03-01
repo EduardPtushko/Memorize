@@ -54,6 +54,5 @@ class EmojiMemoryGame: ObservableObject {
     func newGame() {
         model = EmojiMemoryGame.createMemoryGame(palette: self.palette)
     }
-    
 }
 

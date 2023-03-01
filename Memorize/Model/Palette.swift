@@ -25,7 +25,8 @@ struct Palette: Identifiable {
 }
 
 extension Palette {
-    struct Data {
+    struct Data{
+        var id = UUID()
         var name: String = ""
         var emojis: [String] = []
         var numberPairsOfCardsToShow: Int = 0
@@ -33,7 +34,7 @@ extension Palette {
       }
       
       var data: Data {
-          Data(name: self.name, emojis: emojis, numberPairsOfCardsToShow: numberPairsOfCardsToShow, color: color)
+          Data(id: self.id, name: self.name, emojis: emojis, numberPairsOfCardsToShow: numberPairsOfCardsToShow, color: color)
       }
 
       mutating func update(from data: Data) {

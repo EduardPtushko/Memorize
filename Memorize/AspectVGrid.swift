@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 struct AspectVGrid<Item, ItemView>: View where ItemView: View, Item: Identifiable {
     let items: [Item]
     let aspectRation: CGFloat
@@ -40,7 +39,6 @@ struct AspectVGrid<Item, ItemView>: View where ItemView: View, Item: Identifiabl
         item.spacing = 0
         return item
     }
-    
     
     private func widthThatFits(itemCount: Int, in size: CGSize, itemAspectRatio: CGFloat) -> CGFloat {
         var columnCount = 1

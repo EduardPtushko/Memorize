@@ -42,7 +42,7 @@ struct EmojiMemoryGameView: View {
                     .padding(4)
                     .zIndex(zIndex(of: card))
                     .onTapGesture {
-                        withAnimation(.easeInOut(duration: 1)) {
+                        withAnimation{
                             game.choose(card)
                         }
                     }
@@ -107,18 +107,22 @@ struct CardView: View {
 
 
 struct EmojiMemoryGameView_Previews: PreviewProvider {
-    static let game = EmojiMemoryGame(palette: PaletteStore().palettes[1])
-    //        game.choose(game.cards.first!)
-    static var previews: some View {
-        
-        
-        NavigationStack {
-            EmojiMemoryGameView(game: game )
-                .preferredColorScheme(.light)
+    struct Preview: View {
+        let game = EmojiMemoryGame(palette: PaletteStore().palettes[1])
+       
+        var body: some View {
+            NavigationStack {
+                EmojiMemoryGameView(game: game )
+            }
+            .onAppear {
+                //   game.choose(game.cards.first!)
+            }
         }
-        
-        //        EmojiMemoryGameView(viewModel: EmojiMemoryGame(themeModel: ThemeModel()))
-        //            .preferredColorScheme(.dark)
+    }
+    
+    static var previews: some View {
+        Preview()
+            .preferredColorScheme(.light)
         
     }
 }

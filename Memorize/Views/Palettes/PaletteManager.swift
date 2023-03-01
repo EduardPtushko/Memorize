@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct PaletteManager: View {
-    //    @ObservedObject var paletteStore: PaletteStore
     @Binding var palettes: [Palette]
     @State private var editMode: EditMode = .inactive
     @State private var isShowing = false
-    @State private var isAdding = false
+    @State private var isAddingPalette = false
     @State private var data = Palette.Data()
+    
     
     var body: some View {
         NavigationStack {
@@ -21,6 +21,7 @@ struct PaletteManager: View {
                 ForEach($palettes) { $palette in
                     NavigationLink{
                         EmojiMemoryGameView(game: EmojiMemoryGame(palette: palette))
+                        
                     } label:{
                         VStack(alignment: .leading, spacing: 8) {
                             Text(palette.name)
@@ -40,17 +41,20 @@ struct PaletteManager: View {
                         NavigationStack {
                             PaletteEditor(data: $data)
                                 .navigationBarTitleDisplayMode(.inline)
-                                .navigationBarTitle(palette.name)
+                                .navigationTitle(data.name)
                                 .toolbar {
                                     ToolbarItem(placement: .navigationBarTrailing) {
                                         Button("Done") {
-                                            palette.update(from: data)
+                                            if  let index = palettes.firstIndex(where: { $0.id == data.id}) {
+                                                palettes[index].update(from: data)
+                                            }
                                             data = Palette.Data()
                                             isShowing = false
                                         }
                                     }
                                 }
                         }
+                        
                     }
                 }
                 .onDelete{ indexSet in
@@ -61,7 +65,7 @@ struct PaletteManager: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button {
-                        isAdding = true
+                        isAddingPalette = true
                     } label: {
                         Image(systemName: "plus")
                     }
@@ -71,16 +75,16 @@ struct PaletteManager: View {
                 }
             }
             .environment(\.editMode, $editMode)
-            .sheet(isPresented: $isAdding) {
+            .sheet(isPresented: $isAddingPalette) {
                 NavigationStack {
-                    AddPalette(data: $data)
+                    PaletteEditor(data: $data)
                         .navigationBarTitleDisplayMode(.inline)
-                        .navigationBarTitle(data.name)
+                        .navigationTitle(data.name)
                         .toolbar {
                             ToolbarItem(placement: .navigationBarLeading) {
                                 Button("Cancel") {
                                     data = Palette.Data()
-                                    isAdding = false
+                                    isAddingPalette = false
                                     
                                 }
                             }
@@ -88,7 +92,7 @@ struct PaletteManager: View {
                                 Button("Done") {
                                     palettes.append(Palette(data: data))
                                     data = Palette.Data()
-                                    isAdding = false
+                                    isAddingPalette = false
                                 }
                             }
                         }
@@ -97,12 +101,6 @@ struct PaletteManager: View {
         }
     }
     
-    var tap: some Gesture {
-        TapGesture()
-            .onEnded {_ in
-                isShowing = true
-            }
-    }
 }
 
 struct PaletteManager_Previews: PreviewProvider {
@@ -111,7 +109,6 @@ struct PaletteManager_Previews: PreviewProvider {
         
         var body: some View {
             PaletteManager(palettes: $paletteStore.palettes)
-            //            PaletteManager(paletteStore: paletteStore)
         }
     }
     
@@ -119,3 +116,5 @@ struct PaletteManager_Previews: PreviewProvider {
         Preview()
     }
 }
+
+

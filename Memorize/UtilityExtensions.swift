@@ -5,6 +5,7 @@
 //  Created by Eduard on 21.02.2023.
 //
 
+import Foundation
 import SwiftUI
 import UIKit
 
@@ -34,15 +35,11 @@ extension RGBAColor {
     }
 }
 
-import Foundation
-
 extension Character {
-    /// A simple emoji is one scalar and presented to the user as an Emoji
     var isSimpleEmoji: Bool {
         return unicodeScalars.count == 1 && unicodeScalars.first?.properties.isEmojiPresentation ?? false
     }
 
-    /// Checks if the scalars will be merged into and emoji
     var isCombinedIntoEmoji: Bool {
         return unicodeScalars.count > 1 &&
             unicodeScalars.contains { $0.properties.isJoinControl || $0.properties.isVariationSelector }

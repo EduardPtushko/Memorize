@@ -18,9 +18,10 @@
 		2369A8DA292D2B5100C857B6 /* MemorizeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2369A8D9292D2B5100C857B6 /* MemorizeUITestsLaunchTests.swift */; };
 		2369A8E7292D2DFC00C857B6 /* MemoryGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2369A8E6292D2DFC00C857B6 /* MemoryGame.swift */; };
 		2369A8E9292D2E1300C857B6 /* EmojiMemoryGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2369A8E8292D2E1300C857B6 /* EmojiMemoryGame.swift */; };
-		237C49DE29A65A03009E79CD /* AddPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237C49DD29A65A03009E79CD /* AddPalette.swift */; };
 		23B3A325293DF7AB00B9316E /* Pie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B3A324293DF7AB00B9316E /* Pie.swift */; };
 		23B3A327293DF7B600B9316E /* AspectVGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B3A326293DF7B600B9316E /* AspectVGrid.swift */; };
+		23D4A10029AE666400EF74AC /* ChooseColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D4A0FF29AE666400EF74AC /* ChooseColorView.swift */; };
+		23D4A10229AF6FCC00EF74AC /* PaletteDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23D4A10129AF6FCC00EF74AC /* PaletteDetailView.swift */; };
 		23E9414029A4C08700F177EF /* PaletteEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E9413F29A4C08700F177EF /* PaletteEditor.swift */; };
 		23E9414229A4C09500F177EF /* PaletteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E9414129A4C09500F177EF /* PaletteManager.swift */; };
 		23E9414429A4C0A800F177EF /* PaletteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E9414329A4C0A800F177EF /* PaletteStore.swift */; };
@@ -59,9 +60,10 @@
 		2369A8D9292D2B5100C857B6 /* MemorizeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		2369A8E6292D2DFC00C857B6 /* MemoryGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGame.swift; sourceTree = "<group>"; };
 		2369A8E8292D2E1300C857B6 /* EmojiMemoryGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiMemoryGame.swift; sourceTree = "<group>"; };
-		237C49DD29A65A03009E79CD /* AddPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPalette.swift; sourceTree = "<group>"; };
 		23B3A324293DF7AB00B9316E /* Pie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pie.swift; sourceTree = "<group>"; };
 		23B3A326293DF7B600B9316E /* AspectVGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectVGrid.swift; sourceTree = "<group>"; };
+		23D4A0FF29AE666400EF74AC /* ChooseColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseColorView.swift; sourceTree = "<group>"; };
+		23D4A10129AF6FCC00EF74AC /* PaletteDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteDetailView.swift; sourceTree = "<group>"; };
 		23E9413F29A4C08700F177EF /* PaletteEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteEditor.swift; sourceTree = "<group>"; };
 		23E9414129A4C09500F177EF /* PaletteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteManager.swift; sourceTree = "<group>"; };
 		23E9414329A4C0A800F177EF /* PaletteStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteStore.swift; sourceTree = "<group>"; };
@@ -179,7 +181,8 @@
 			children = (
 				23E9413F29A4C08700F177EF /* PaletteEditor.swift */,
 				23E9414129A4C09500F177EF /* PaletteManager.swift */,
-				237C49DD29A65A03009E79CD /* AddPalette.swift */,
+				23D4A0FF29AE666400EF74AC /* ChooseColorView.swift */,
+				23D4A10129AF6FCC00EF74AC /* PaletteDetailView.swift */,
 			);
 			path = Palettes;
 			sourceTree = "<group>";
@@ -314,7 +317,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				237C49DE29A65A03009E79CD /* AddPalette.swift in Sources */,
+				23D4A10029AE666400EF74AC /* ChooseColorView.swift in Sources */,
 				23B3A325293DF7AB00B9316E /* Pie.swift in Sources */,
 				2369A8E7292D2DFC00C857B6 /* MemoryGame.swift in Sources */,
 				23E9414629A4C21C00F177EF /* UtilityExtensions.swift in Sources */,
@@ -325,6 +328,7 @@
 				2369A8BF292D2B4F00C857B6 /* EmojiMemoryGameView.swift in Sources */,
 				2369A8BD292D2B4F00C857B6 /* MemorizeApp.swift in Sources */,
 				23E9414429A4C0A800F177EF /* PaletteStore.swift in Sources */,
+				23D4A10229AF6FCC00EF74AC /* PaletteDetailView.swift in Sources */,
 				2369A8E9292D2E1300C857B6 /* EmojiMemoryGame.swift in Sources */,
 				23E9414029A4C08700F177EF /* PaletteEditor.swift in Sources */,
 			);
