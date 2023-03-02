@@ -106,7 +106,7 @@ struct CardView: View {
 
 struct EmojiMemoryGameView_Previews: PreviewProvider {
     struct Preview: View {
-        let game = EmojiMemoryGame(palette: PaletteStore().palettes[1])
+        let game = EmojiMemoryGame(palette: PaletteStore(named: "Preview").palettes[1])
        
         var body: some View {
             NavigationStack {

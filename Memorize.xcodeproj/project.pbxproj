@@ -133,12 +133,9 @@
 		2369A8BB292D2B4E00C857B6 /* Memorize */ = {
 			isa = PBXGroup;
 			children = (
+				23D4A10729B0E1FA00EF74AC /* Helpers */,
 				23156EB5293E265A002267B3 /* Model */,
 				23E9413D29A4BFB100F177EF /* Views */,
-				23B3A326293DF7B600B9316E /* AspectVGrid.swift */,
-				23156EB3293E2624002267B3 /* Cardify.swift */,
-				23B3A324293DF7AB00B9316E /* Pie.swift */,
-				23E9414529A4C21C00F177EF /* UtilityExtensions.swift */,
 				2369A8BC292D2B4F00C857B6 /* MemorizeApp.swift */,
 				2369A8C0292D2B5100C857B6 /* Assets.xcassets */,
 				2369A8C2292D2B5100C857B6 /* Preview Content */,
@@ -171,9 +168,20 @@
 			path = MemorizeUITests;
 			sourceTree = "<group>";
 		};
+		23D4A10729B0E1FA00EF74AC /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				23B3A324293DF7AB00B9316E /* Pie.swift */,
+				23E9414529A4C21C00F177EF /* UtilityExtensions.swift */,
+				23156EB3293E2624002267B3 /* Cardify.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		23E9413D29A4BFB100F177EF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				23B3A326293DF7B600B9316E /* AspectVGrid.swift */,
 				2369A8BE292D2B4F00C857B6 /* EmojiMemoryGameView.swift */,
 				23E9413E29A4BFDD00F177EF /* Palettes */,
 			);
