@@ -8,40 +8,40 @@
 import Foundation
 import SwiftUI
 
-struct Palette: Identifiable {
+struct Palette: Codable, Identifiable {
     let id: UUID
     var name: String
     var emojis: [String]
     var numberPairsOfCardsToShow: Int
-    var color: Color
+    var rgbaColor: RGBAColor
     
-    init(id: UUID = UUID(), name: String, emojis: [String], numberPairsOfCardsToShow: Int, color: Color) {
+    init(id: UUID = UUID(), name: String, emojis: [String], numberPairsOfCardsToShow: Int, rgbaColor: RGBAColor) {
         self.id = id
         self.name = name
         self.emojis = emojis
         self.numberPairsOfCardsToShow = numberPairsOfCardsToShow
-        self.color = color
+        self.rgbaColor = rgbaColor
     }
 }
 
 extension Palette {
-    struct Data{
+    struct Data: Codable, Identifiable {
         var id = UUID()
         var name: String = ""
         var emojis: [String] = []
         var numberPairsOfCardsToShow: Int = 0
-        var color: Color = .brown
+        var rgbaColor: RGBAColor = RGBAColor(color: .brown)
       }
       
       var data: Data {
-          Data(id: self.id, name: self.name, emojis: emojis, numberPairsOfCardsToShow: numberPairsOfCardsToShow, color: color)
+          Data(id: self.id, name: self.name, emojis: emojis, numberPairsOfCardsToShow: numberPairsOfCardsToShow, rgbaColor: rgbaColor)
       }
 
       mutating func update(from data: Data) {
           self.name = data.name
           self.emojis = data.emojis
           self.numberPairsOfCardsToShow = data.numberPairsOfCardsToShow
-          self.color = data.color
+          self.rgbaColor = data.rgbaColor
       }
 
       init(data: Data) {
@@ -49,22 +49,23 @@ extension Palette {
           name = data.name
           emojis = data.emojis
           numberPairsOfCardsToShow = data.numberPairsOfCardsToShow
-          color = data.color
+          rgbaColor = data.rgbaColor
       }
 }
 
+
 extension Palette {
     static var sampleData: [Palette] = [
-        Palette(name: "Cars", emojis: ["🚗", "🛴", "✈️", "🛵", "⛵️", "🚎", "🚐", "🚛", "🛻", "🏎", "🚂", "🚊", "🚀", "🚁", "🚢", "🛶", "🛥", "🚞", "🚟", "🚃"], numberPairsOfCardsToShow: 10, color: .brown),
+        Palette(name: "Cars", emojis: ["🚗", "🛴", "✈️", "🛵", "⛵️", "🚎", "🚐", "🚛", "🛻", "🏎", "🚂", "🚊", "🚀", "🚁", "🚢", "🛶", "🛥", "🚞", "🚟", "🚃"], numberPairsOfCardsToShow: 10, rgbaColor: RGBAColor(color: Color.brown)),
         Palette(
             name: "Halloween",
             emojis: ["👻","🎃","🕷","🧟‍♂️","🧛🏼‍♀️","☠️","👽","🦹‍♀️","🦇","🌘","⚰️","🔮"],
-            numberPairsOfCardsToShow: 12, color: .orange
+            numberPairsOfCardsToShow: 12, rgbaColor: RGBAColor(color: Color.orange)
         ),
         Palette(
             name: "Flags",
             emojis: ["🇸🇬","🇯🇵","🏴‍☠️","🏳️‍🌈","🇬🇧","🇹🇼","🇺🇸","🇦🇶","🇰🇵","🇭🇰","🇲🇨","🇼🇸"],  numberPairsOfCardsToShow: 8,
-            color: .red
+            rgbaColor: RGBAColor(color: Color.red)
          )
     ]
 }

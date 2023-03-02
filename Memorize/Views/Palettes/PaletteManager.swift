@@ -14,20 +14,17 @@ struct PaletteManager: View {
     @State private var isAddingPalette = false
     @State private var data = Palette.Data()
     
-    
     var body: some View {
         NavigationStack {
             List {
                 ForEach($palettes) { $palette in
                     NavigationLink{
                         EmojiMemoryGameView(game: EmojiMemoryGame(palette: palette))
-                        
                     } label:{
                         VStack(alignment: .leading, spacing: 8) {
                             Text(palette.name)
                                 .font(.title2)
                                 .foregroundColor(palette.color)
-                            
                             Text(palette.emojis[0..<palette.numberPairsOfCardsToShow].joined(separator: ","))
                                 .lineLimit(1)
                         }
@@ -48,8 +45,8 @@ struct PaletteManager: View {
                                             if  let index = palettes.firstIndex(where: { $0.id == data.id}) {
                                                 palettes[index].update(from: data)
                                             }
-                                            data = Palette.Data()
                                             isShowing = false
+                                            data = Palette.Data()
                                         }
                                     }
                                 }
@@ -83,16 +80,15 @@ struct PaletteManager: View {
                         .toolbar {
                             ToolbarItem(placement: .navigationBarLeading) {
                                 Button("Cancel") {
-                                    data = Palette.Data()
                                     isAddingPalette = false
-                                    
+                                    data = Palette.Data()
                                 }
                             }
                             ToolbarItem(placement: .navigationBarTrailing) {
                                 Button("Done") {
                                     palettes.append(Palette(data: data))
-                                    data = Palette.Data()
                                     isAddingPalette = false
+                                    data = Palette.Data()
                                 }
                             }
                         }

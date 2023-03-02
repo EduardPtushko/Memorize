@@ -38,7 +38,7 @@ struct EmojiMemoryGameView: View {
                 Color.clear
             } else {
                 CardView(card: card)
-                    .foregroundColor(game.palette.color)
+                    .foregroundColor(game.palette.color )
                     .padding(4)
                     .zIndex(zIndex(of: card))
                     .onTapGesture {
@@ -91,13 +91,11 @@ struct CardView: View {
             }
         }
         .cardify(isFaceUp: card.isFaceUp)
-        
     }
     
     private func scale(thatFits size: CGSize) -> CGFloat {
         min(size.width, size.height) / (DrawingConstants.fontSize / DrawingConstants.fontScale)
     }
-    
     
     private struct DrawingConstants {
         static let fontScale: CGFloat = 0.7

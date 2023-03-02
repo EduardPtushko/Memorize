@@ -34,7 +34,7 @@ struct ChooseColorView: View {
                     .aspectRatio(2/3, contentMode: .fit)
                     .foregroundColor(allColors[index])
                     .onTapGesture {
-                        data.color = allColors[index]
+                        data.rgbaColor = RGBAColor(color: allColors[index])
                     }
             }
             

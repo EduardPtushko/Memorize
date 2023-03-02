@@ -14,34 +14,34 @@ final class PaletteStore: ObservableObject {
     
     init() {
         palettes =  [
-            Palette(name: "Cars", emojis: ["🚗", "🛴", "✈️", "🛵", "⛵️", "🚎", "🚐", "🚛", "🛻", "🏎", "🚂", "🚊", "🚀", "🚁", "🚢", "🛶", "🛥", "🚞", "🚟", "🚃"], numberPairsOfCardsToShow: 10, color: .brown),
+            Palette(name: "Cars", emojis: ["🚗", "🛴", "✈️", "🛵", "⛵️", "🚎", "🚐", "🚛", "🛻", "🏎", "🚂", "🚊", "🚀", "🚁", "🚢", "🛶", "🛥", "🚞", "🚟", "🚃"], numberPairsOfCardsToShow: 10, rgbaColor: RGBAColor(color: Color.brown)),
             Palette(
                 name: "Halloween",
                 emojis: ["👻","🎃","🕷","🧟‍♂️","🧛🏼‍♀️","☠️","👽","🦹‍♀️","🦇","🌘","⚰️","🔮"],
-                numberPairsOfCardsToShow: 12, color: .orange
+                numberPairsOfCardsToShow: 12, rgbaColor: RGBAColor(color: Color.orange)
             ),
             Palette(
                 name: "Flags",
                 emojis: ["🇸🇬","🇯🇵","🏴‍☠️","🏳️‍🌈","🇬🇧","🇹🇼","🇺🇸","🇦🇶","🇰🇵","🇭🇰","🇲🇨","🇼🇸"],  numberPairsOfCardsToShow: 8,
-                color: .red
+                rgbaColor: RGBAColor(color: Color.red)
              ),
             Palette(
                 name: "Animals",
                 emojis: ["🦑","🦧","🦃","🦚","🐫","🦉","🦕","🦥","🐸","🐼","🐺","🦈"], numberPairsOfCardsToShow: 6,
-                color: .green),
+                rgbaColor: RGBAColor(color: Color.green)),
             Palette(
                 name: "Places",
                 emojis: ["🗽","🗿","🗼","🎢","🌋","🏝","🏜","⛩","🕍","🕋","🏯","🏟"], numberPairsOfCardsToShow: 4,
-                color: .blue),
+                rgbaColor: RGBAColor(color: Color.blue)),
             Palette(
                 name: "Sports",
                 emojis: ["🤺","🏑","⛷","⚽️","🏀","🪂","🥏","⛳️","🛹","🎣","🏉","🏓"], numberPairsOfCardsToShow: 8,
-                color: .orange
+                rgbaColor: RGBAColor(color: Color.gray)
                ),
             Palette(
                 name: "Foods",
                 emojis: ["🌮","🍕","🍝","🍱","🍪","🍩","🥨","🥖","🍟","🍙","🍢","🍿"], numberPairsOfCardsToShow: 7,
-                color: .yellow)
+                rgbaColor: RGBAColor(color: Color.yellow))
         ]
     }
 }

@@ -105,7 +105,6 @@ extension PaletteEditor {
                 .fontWeight(.bold)
         }
     }
-    
 }
 
 
