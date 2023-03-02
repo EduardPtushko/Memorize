@@ -25,7 +25,7 @@ struct PaletteManager: View {
                             Text(palette.name)
                                 .font(.title2)
                                 .foregroundColor(palette.color)
-                            Text(palette.emojis[0..<palette.numberPairsOfCardsToShow].joined(separator: ","))
+                            Text(palette.emojis[0..<palette.numberPairsOfCardsToShow].joined(separator: ""))
                                 .lineLimit(1)
                         }
                     }
@@ -101,7 +101,7 @@ struct PaletteManager: View {
 
 struct PaletteManager_Previews: PreviewProvider {
     struct Preview: View {
-        @StateObject var paletteStore = PaletteStore()
+        @StateObject var paletteStore = PaletteStore(named: "Preview")
         
         var body: some View {
             PaletteManager(palettes: $paletteStore.palettes)

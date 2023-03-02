@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct MemorizeApp: App {
-    @StateObject var paletteStore = PaletteStore()
+    @StateObject var paletteStore = PaletteStore(named: "Memorize")
     
     var body: some Scene {
         WindowGroup {
