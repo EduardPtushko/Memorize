@@ -13,9 +13,6 @@
 		2369A8BF292D2B4F00C857B6 /* EmojiMemoryGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2369A8BE292D2B4F00C857B6 /* EmojiMemoryGameView.swift */; };
 		2369A8C1292D2B5100C857B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2369A8C0292D2B5100C857B6 /* Assets.xcassets */; };
 		2369A8C4292D2B5100C857B6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2369A8C3292D2B5100C857B6 /* Preview Assets.xcassets */; };
-		2369A8CE292D2B5100C857B6 /* MemorizeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2369A8CD292D2B5100C857B6 /* MemorizeTests.swift */; };
-		2369A8D8292D2B5100C857B6 /* MemorizeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2369A8D7292D2B5100C857B6 /* MemorizeUITests.swift */; };
-		2369A8DA292D2B5100C857B6 /* MemorizeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2369A8D9292D2B5100C857B6 /* MemorizeUITestsLaunchTests.swift */; };
 		2369A8E7292D2DFC00C857B6 /* MemoryGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2369A8E6292D2DFC00C857B6 /* MemoryGame.swift */; };
 		2369A8E9292D2E1300C857B6 /* EmojiMemoryGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2369A8E8292D2E1300C857B6 /* EmojiMemoryGame.swift */; };
 		23B3A325293DF7AB00B9316E /* Pie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23B3A324293DF7AB00B9316E /* Pie.swift */; };
@@ -55,10 +52,7 @@
 		2369A8C0292D2B5100C857B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2369A8C3292D2B5100C857B6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2369A8C9292D2B5100C857B6 /* MemorizeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MemorizeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		2369A8CD292D2B5100C857B6 /* MemorizeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeTests.swift; sourceTree = "<group>"; };
 		2369A8D3292D2B5100C857B6 /* MemorizeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MemorizeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		2369A8D7292D2B5100C857B6 /* MemorizeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeUITests.swift; sourceTree = "<group>"; };
-		2369A8D9292D2B5100C857B6 /* MemorizeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		2369A8E6292D2DFC00C857B6 /* MemoryGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGame.swift; sourceTree = "<group>"; };
 		2369A8E8292D2E1300C857B6 /* EmojiMemoryGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiMemoryGame.swift; sourceTree = "<group>"; };
 		23B3A324293DF7AB00B9316E /* Pie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pie.swift; sourceTree = "<group>"; };
@@ -97,25 +91,10 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		23156EB5293E265A002267B3 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				2369A8E6292D2DFC00C857B6 /* MemoryGame.swift */,
-				2369A8E8292D2E1300C857B6 /* EmojiMemoryGame.swift */,
-				23E9414329A4C0A800F177EF /* PaletteStore.swift */,
-				230FA73B29A612F7004FEA3A /* Palette.swift */,
-				23D4A10329B0A75200EF74AC /* Palette+Extension.swift */,
-				23D4A10529B0B51A00EF74AC /* RGBAColor.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		2369A8B0292D2B4E00C857B6 = {
 			isa = PBXGroup;
 			children = (
 				2369A8BB292D2B4E00C857B6 /* Memorize */,
-				2369A8CC292D2B5100C857B6 /* MemorizeTests */,
-				2369A8D6292D2B5100C857B6 /* MemorizeUITests */,
 				2369A8BA292D2B4E00C857B6 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -133,10 +112,21 @@
 		2369A8BB292D2B4E00C857B6 /* Memorize */ = {
 			isa = PBXGroup;
 			children = (
-				23D4A10729B0E1FA00EF74AC /* Helpers */,
-				23156EB5293E265A002267B3 /* Model */,
-				23E9413D29A4BFB100F177EF /* Views */,
+				23B3A326293DF7B600B9316E /* AspectVGrid.swift */,
+				23156EB3293E2624002267B3 /* Cardify.swift */,
+				23D4A0FF29AE666400EF74AC /* ChooseColorView.swift */,
+				2369A8E8292D2E1300C857B6 /* EmojiMemoryGame.swift */,
+				2369A8BE292D2B4F00C857B6 /* EmojiMemoryGameView.swift */,
 				2369A8BC292D2B4F00C857B6 /* MemorizeApp.swift */,
+				2369A8E6292D2DFC00C857B6 /* MemoryGame.swift */,
+				230FA73B29A612F7004FEA3A /* Palette.swift */,
+				23D4A10329B0A75200EF74AC /* Palette+Extension.swift */,
+				23E9413F29A4C08700F177EF /* PaletteEditor.swift */,
+				23E9414129A4C09500F177EF /* PaletteManager.swift */,
+				23E9414329A4C0A800F177EF /* PaletteStore.swift */,
+				23B3A324293DF7AB00B9316E /* Pie.swift */,
+				23D4A10529B0B51A00EF74AC /* RGBAColor.swift */,
+				23E9414529A4C21C00F177EF /* UtilityExtensions.swift */,
 				2369A8C0292D2B5100C857B6 /* Assets.xcassets */,
 				2369A8C2292D2B5100C857B6 /* Preview Content */,
 			);
@@ -149,53 +139,6 @@
 				2369A8C3292D2B5100C857B6 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		2369A8CC292D2B5100C857B6 /* MemorizeTests */ = {
-			isa = PBXGroup;
-			children = (
-				2369A8CD292D2B5100C857B6 /* MemorizeTests.swift */,
-			);
-			path = MemorizeTests;
-			sourceTree = "<group>";
-		};
-		2369A8D6292D2B5100C857B6 /* MemorizeUITests */ = {
-			isa = PBXGroup;
-			children = (
-				2369A8D7292D2B5100C857B6 /* MemorizeUITests.swift */,
-				2369A8D9292D2B5100C857B6 /* MemorizeUITestsLaunchTests.swift */,
-			);
-			path = MemorizeUITests;
-			sourceTree = "<group>";
-		};
-		23D4A10729B0E1FA00EF74AC /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				23B3A324293DF7AB00B9316E /* Pie.swift */,
-				23E9414529A4C21C00F177EF /* UtilityExtensions.swift */,
-				23156EB3293E2624002267B3 /* Cardify.swift */,
-			);
-			path = Helpers;
-			sourceTree = "<group>";
-		};
-		23E9413D29A4BFB100F177EF /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				23B3A326293DF7B600B9316E /* AspectVGrid.swift */,
-				2369A8BE292D2B4F00C857B6 /* EmojiMemoryGameView.swift */,
-				23E9413E29A4BFDD00F177EF /* Palettes */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		23E9413E29A4BFDD00F177EF /* Palettes */ = {
-			isa = PBXGroup;
-			children = (
-				23E9413F29A4C08700F177EF /* PaletteEditor.swift */,
-				23E9414129A4C09500F177EF /* PaletteManager.swift */,
-				23D4A0FF29AE666400EF74AC /* ChooseColorView.swift */,
-			);
-			path = Palettes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -350,7 +293,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2369A8CE292D2B5100C857B6 /* MemorizeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,8 +300,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2369A8DA292D2B5100C857B6 /* MemorizeUITestsLaunchTests.swift in Sources */,
-				2369A8D8292D2B5100C857B6 /* MemorizeUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
