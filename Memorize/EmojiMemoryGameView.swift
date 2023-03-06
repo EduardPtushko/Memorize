@@ -1,5 +1,5 @@
 //
-//  EmojiMemoryGameView.swift
+//  ContentView.swift
 //  Memorize
 //
 //  Created by Eduard on 22.11.2022.
@@ -9,97 +9,43 @@ import SwiftUI
 
 struct EmojiMemoryGameView: View {
     @ObservedObject var game: EmojiMemoryGame
-    @State private var dealt = Set<Int>()
-    @Namespace private var dealingNamespace
-    
-    var body: some View {
-        ZStack(alignment: .bottom){
-            VStack {
-                gameBody
-               
-                HStack{
-                    shuffle
-                    Spacer()
-                    restart
-                }
-                .padding(.horizontal)
-            }
-            deckBody
-        }
-        .padding()
-    }
-    
-    private func deal(_ card: EmojiMemoryGame.Card) {
-        dealt.insert(card.id)
-    }
-    private func isUndealt(_ card: EmojiMemoryGame.Card) -> Bool {
-        !dealt.contains(card.id)
-    }
-    
-    private func dealAnimation(for card: EmojiMemoryGame.Card) -> Animation {
-        var delay = 0.0
-        if let index = game.cards.firstIndex(where: { $0.id == card.id }) {
-            delay = Double(index) * (CardConstants.totalDealDuration / Double(game.cards.count))
-        }
-        return Animation.easeInOut(duration: CardConstants.dealDuration).delay(delay)
-    }
     
     private func zIndex(of card: EmojiMemoryGame.Card) -> Double {
-        -Double(game.cards.firstIndex(where: { $0.id == card.id}) ?? 0)
+        -Double(
+            game.cards.firstIndex(where: { $0.id == card.id}) ?? 0
+        )
+    }
+    
+    var body: some View {
+        VStack{
+            gameBody
+        }
+        .padding()
+        .navigationTitle(game.palette.name)
+        .toolbar {
+            Button("New Game") {
+                withAnimation {
+                    game.newGame()
+                }
+            }
+            .padding(.trailing, 16)
+        }
     }
     
     var gameBody: some View {
-        AspectVGrid(items: game.cards, aspectRatio: 2/3) { card in
-            if isUndealt(card) || (card.isMatched && !card.isFaceUp) {
+        AspectVGrid(items: game.cards, aspectRation: 2/3) { card in
+            if  !card.isFaceUp && card.isMatched{
                 Color.clear
             } else {
                 CardView(card: card)
-                    .matchedGeometryEffect(id: card.id, in: dealingNamespace)
+                    .foregroundColor(game.palette.color )
                     .padding(4)
-                    .transition(AnyTransition.asymmetric(insertion: .identity, removal: .scale))
                     .zIndex(zIndex(of: card))
                     .onTapGesture {
-                        withAnimation {
+                        withAnimation{
                             game.choose(card)
                         }
                     }
-            }
-        }
-        .foregroundColor(CardConstants.color)
-    }
-    
-    var deckBody: some View {
-        ZStack {
-            ForEach(game.cards.filter(isUndealt)) { card in
-                CardView(card: card)
-                    .matchedGeometryEffect(id: card.id, in: dealingNamespace)
-                    .transition(AnyTransition.asymmetric(insertion: .opacity, removal: .identity))
-                    .zIndex(zIndex(of: card))
-            }
-        }
-        .frame(width: CardConstants.undealtWidth, height: CardConstants.undealtHeight)
-        .foregroundColor(CardConstants.color)
-        .onTapGesture{
-            for card in game.cards {
-            withAnimation(dealAnimation(for: card)) {
-                    deal(card)
-                }
-            }
-        }
-    }
-    
-    var restart: some View {
-        Button("Restart") {
-            withAnimation{
-                dealt = []
-                game.restart()
-            }
-        }
-    }
-    var shuffle: some View {
-        Button("Shuffle") {
-            withAnimation{
-                game.shuffle()
             }
         }
     }
@@ -114,18 +60,6 @@ struct EmojiMemoryGameView: View {
     }
 }
 
-struct EmojiMemoryGameView_Previews: PreviewProvider {
-    static var previews: some View {
-        let game = EmojiMemoryGame()
-//        game.choose(game.cards.first!)
-        return  EmojiMemoryGameView(game: game)
-            .preferredColorScheme(.light)
-        //        EmojiMemoryGameView(game: EmojiMemoryGame())
-        //            .preferredColorScheme(.dark)
-        
-    }
-}
-
 struct CardView: View {
     let card: EmojiMemoryGame.Card
     @State private var animatedBonusRemaining: Double = 0
@@ -133,9 +67,9 @@ struct CardView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                Group{
+                Group {
                     if card.isConsumingBonusTime {
-                        Pie(startAngle: .degrees(0 - 90), endAngle: Angle(degrees: (1 - animatedBonusRemaining)*360-90))
+                        Pie(startAngle: .degrees(0 - 90), endAngle: .degrees((1 - animatedBonusRemaining) * 360 - 90))
                             .onAppear {
                                 animatedBonusRemaining = card.bonusRemaining
                                 withAnimation(.linear(duration: card.bonusTimeRemaining)) {
@@ -143,26 +77,24 @@ struct CardView: View {
                                 }
                             }
                     } else {
-                        Pie(startAngle: .degrees(0 - 90), endAngle: Angle(degrees: (1 - card.bonusRemaining)*360 - 90))
+                        Pie(startAngle: .degrees(0 - 90), endAngle: .degrees((1 - card.bonusRemaining) * 360 - 90))
                     }
                 }
-                    .padding(5)
-                    .opacity(0.5)
-                
+                .opacity(0.3)
+                .padding(5)
                 Text(card.content)
-                    .rotationEffect(Angle.degrees(card.isMatched ? 360 : 0))
-                    .animation(.linear(duration: 1).repeatForever(autoreverses: false), value: card.isMatched)
-                    .font(Font.system(size: DrawingConstants.fontSize))
+                    .rotationEffect(Angle(degrees: card.isMatched ? 360 : 0))
+                    .animation(.easeOut(duration: 1).repeatForever(autoreverses: false), value: card.isMatched)
+                    .font(.system(size: DrawingConstants.fontSize))
                     .scaleEffect(scale(thatFits: geometry.size))
             }
-            .cardify(isFaceUp: card.isFaceUp)
         }
-        
+        .cardify(isFaceUp: card.isFaceUp)
     }
     
     private func scale(thatFits size: CGSize) -> CGFloat {
-          min(size.width, size.height) / (DrawingConstants.fontSize / DrawingConstants.fontScale)
-      }
+        min(size.width, size.height) / (DrawingConstants.fontSize / DrawingConstants.fontScale)
+    }
     
     private struct DrawingConstants {
         static let fontScale: CGFloat = 0.7
@@ -170,4 +102,24 @@ struct CardView: View {
     }
 }
 
+
+struct EmojiMemoryGameView_Previews: PreviewProvider {
+    struct Preview: View {
+        let game = EmojiMemoryGame(palette: PaletteStore(named: "Preview").palettes[1])
+       
+        var body: some View {
+            NavigationStack {
+                EmojiMemoryGameView(game: game )
+            }
+            .onAppear {
+                //   game.choose(game.cards.first!)
+            }
+        }
+    }
+    
+    static var previews: some View {
+        Preview()
+            .preferredColorScheme(.light)
+    }
+}
 
