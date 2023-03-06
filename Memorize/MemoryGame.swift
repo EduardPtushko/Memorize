@@ -34,7 +34,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
     }
     
     init(numberOfPairsOfCards: Int, createCardContent: (Int) -> CardContent) {
-        self.cards = Array<Card>()
+        self.cards = []
         for pairIndex in 0..<numberOfPairsOfCards {
             let content = createCardContent(pairIndex)
             cards.append(Card(content: content, id: pairIndex * 2))
@@ -53,6 +53,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
                 }
             }
         }
+        
         var isMatched = false {
             didSet {
                 stopUsingBonusTime()
@@ -94,7 +95,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
                 lastFaceUpDate = Date()
             }
         }
-        
+
         private mutating func stopUsingBonusTime() {
             pastFaceUpTime = faceUpTime
             self.lastFaceUpDate = nil

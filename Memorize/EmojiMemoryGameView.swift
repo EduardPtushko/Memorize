@@ -60,7 +60,6 @@ struct EmojiMemoryGameView: View {
     }
 }
 
-
 struct CardView: View {
     let card: EmojiMemoryGame.Card
     @State private var animatedBonusRemaining: Double = 0
@@ -121,6 +120,6 @@ struct EmojiMemoryGameView_Previews: PreviewProvider {
     static var previews: some View {
         Preview()
             .preferredColorScheme(.light)
-        
     }
 }
+
