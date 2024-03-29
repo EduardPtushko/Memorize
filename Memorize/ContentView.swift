@@ -7,13 +7,21 @@
 
 import SwiftUI
 
+let vehicles = ["🚗", "🛴", "✈️", "🛵", "⛵️", "🚎", "🚐", "🚛", "🛻", "🏎", "🚂", "🚊", "🚀", "🚁", "🚢", "🛶", "🛥", "🚞", "🚟", "🚃"]
+let halloween = ["👻", "🎃", "🕷", "🧟‍♂️", "🧛🏼‍♀️", "☠️", "👽", "🦹‍♀️", "🦇", "🌘", "⚰️", "🔮"]
+
+let animals = ["🦑", "🦧", "🦃", "🦚", "🐫", "🦉", "🦕", "🦥", "🐸", "🐼", "🐺", "🦈"]
+
 struct ContentView: View {
-    let emojis: [String] = ["👻", "🎃", "🕷", "🧟‍♂️", "🧛🏼‍♀️", "☠️", "👽", "🦹‍♀️", "🦇", "🌘", "⚰️", "🔮"]
+    @State private var emojis: [String] = vehicles
 
     @State private var cardCount = 4
 
     var body: some View {
         VStack(spacing: 20.0) {
+            Text("Memorize!")
+                .font(.largeTitle)
+
             ScrollView {
                 cards
             }
@@ -24,38 +32,34 @@ struct ContentView: View {
     }
 
     private var cardCountAdjusters: some View {
-        HStack {
-            cardRemover
-            Spacer()
-            cardAdder
+        HStack(spacing: 40.0) {
+            themeButton(theme: vehicles, icon: "car", name: "Vehicle")
+            themeButton(theme: halloween, icon: "ev.plug.dc.chademo", name: "Hellowen")
+            themeButton(theme: animals, icon: "tortoise", name: "Animals")
         }
-        .imageScale(.large)
-        .font(.largeTitle)
+    }
+
+    private func themeButton(theme: [String], icon: String, name: String) -> some View {
+        Button {
+            emojis = theme.shuffled()
+        } label: {
+            VStack {
+                Image(systemName: icon)
+                    .font(.title)
+                Text(name)
+                    .font(.subheadline)
+            }
+        }
     }
 
     private var cards: some View {
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: 120))]) {
-            ForEach(0..<cardCount, id: \.self) { index in
-                CardView(content: emojis[index])
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 80))]) {
+            ForEach(emojis, id: \.self) { emoji in
+                CardView(content: emoji)
                     .aspectRatio(2 / 3, contentMode: .fit)
             }
         }
         .foregroundStyle(.orange)
-    }
-
-    func cardCountAdjuster(by offset: Int, symbol: String) -> some View {
-        Button("", systemImage: symbol) {
-            cardCount += offset
-        }
-        .disabled(cardCount + offset < 1 || cardCount + offset > emojis.count)
-    }
-
-    private var cardRemover: some View {
-        cardCountAdjuster(by: -1, symbol: "rectangle.stack.badge.minus")
-    }
-
-    private var cardAdder: some View {
-        cardCountAdjuster(by: 1, symbol: "rectangle.stack.badge.plus")
     }
 }
 
@@ -65,7 +69,7 @@ struct ContentView: View {
 
 struct CardView: View {
     let content: String
-    @State var isFaceUp = true
+    @State var isFaceUp = false
 
     var body: some View {
         ZStack {
