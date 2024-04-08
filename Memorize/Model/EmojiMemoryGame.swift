@@ -11,17 +11,16 @@ import SwiftUI
 final class EmojiMemoryGame {
     typealias Card = MemoryGame<String>.Card
 
-    static func createMemoryGame(theme: ThemeModel.Theme) -> MemoryGame<String> {
+    static func createMemoryGame(theme: Theme) -> MemoryGame<String> {
         MemoryGame(numberOfPairs: theme.numberOfPairsOfCards) { index in
             theme.emojis[index]
         }
     }
 
-//    private var themeModel: ThemeModel
     private var model: MemoryGame<String>
-    var theme: ThemeModel.Theme
+    var theme: Theme
 
-    init(theme: ThemeModel.Theme) {
+    init(theme: Theme) {
         self.theme = theme
         model = EmojiMemoryGame.createMemoryGame(theme: theme)
     }
@@ -35,7 +34,7 @@ final class EmojiMemoryGame {
     }
 
     var color: Color {
-        theme.color
+        Color(rgba: theme.color)
     }
 
     // MARK: - Intents
