@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D322CA152BCBC1F5009524B9 /* FlyingNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = D322CA142BCBC1F5009524B9 /* FlyingNumber.swift */; };
 		D324B8B92BBFE511007B889B /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D324B8B82BBFE511007B889B /* RootView.swift */; };
 		D32BE1282BC30C9B0001DC7B /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32BE1272BC30C9B0001DC7B /* DataManager.swift */; };
 		D345D7052BC19AAC005C7CCD /* RGBA.swift in Sources */ = {isa = PBXBuildFile; fileRef = D345D7042BC19AAC005C7CCD /* RGBA.swift */; };
@@ -30,7 +29,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D322CA142BCBC1F5009524B9 /* FlyingNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlyingNumber.swift; sourceTree = "<group>"; };
 		D324B8B82BBFE511007B889B /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		D32BE1272BC30C9B0001DC7B /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		D345D7042BC19AAC005C7CCD /* RGBA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGBA.swift; sourceTree = "<group>"; };
@@ -118,13 +116,12 @@
 		D369622D2BC3EB7D00A6DF0D /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D324B8B82BBFE511007B889B /* RootView.swift */,
 				D3C8DB642BBB1397007E5D82 /* CardView.swift */,
 				D36962322BC3EEBE00A6DF0D /* ColorToSelectView.swift */,
 				D35119992BB88371005F8916 /* EmojiLazyGrid.swift */,
 				D367DC5E2BB6ADB500B6A12C /* EmojiMemoryGameView.swift */,
-				D322CA142BCBC1F5009524B9 /* FlyingNumber.swift */,
 				D3CC22C32BBDC4E700DEC16C /* Pie.swift */,
+				D324B8B82BBFE511007B889B /* RootView.swift */,
 				D35CC2922BC15AC7009924E7 /* ThemeDetailsView.swift */,
 			);
 			path = Views;
@@ -282,7 +279,6 @@
 				D35119962BB81C24005F8916 /* MemoryGame.swift in Sources */,
 				D367DC5D2BB6ADB500B6A12C /* MemorizeApp.swift in Sources */,
 				D35CC2952BC174D6009924E7 /* SampleData.swift in Sources */,
-				D322CA152BCBC1F5009524B9 /* FlyingNumber.swift in Sources */,
 				D3C8DB652BBB1397007E5D82 /* CardView.swift in Sources */,
 				D3CC22C62BBDC4FB00DEC16C /* Cardify.swift in Sources */,
 				D35119982BB81E42005F8916 /* EmojiMemoryGame.swift in Sources */,

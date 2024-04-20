@@ -39,7 +39,7 @@ final class EmojiMemoryGame {
 
     // MARK: - Intents
 
-    func choose(card: Card) {
+    func choose(_ card: Card) {
         model.choose(card: card)
     }
 

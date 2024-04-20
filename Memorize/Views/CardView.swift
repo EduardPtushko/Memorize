@@ -15,17 +15,27 @@ struct CardView: View {
     }
 
     var body: some View {
-        Pie(endAngle: .degrees(240))
-            .fill(.orange)
-            .overlay(
-                Text(card.content)
-                    .font(.system(size: Constants.FontSize.largest))
-                    .minimumScaleFactor(Constants.FontSize.scaleFactor)
-                    .aspectRatio(1, contentMode: .fit)
-                    .padding(Constants.inset)
-            )
-            .cardify(isFaceUp: card.isFaceUp)
-            .opacity(card.isFaceUp || !card.isMatched ? 1 : 0)
+        TimelineView(.animation) { _ in
+
+            if card.isFaceUp || !card.isMatched {
+                Pie(endAngle: .degrees(card.bonusPercentRemaining * 360))
+                    .fill(.orange)
+                    .overlay(cardContents.padding(Constants.inset))
+                    .cardify(isFaceUp: card.isFaceUp)
+                    .transition(.opacity)
+            } else {
+                Color.clear
+            }
+        }
+    }
+
+    private var cardContents: some View {
+        Text(card.content)
+            .font(.system(size: Constants.FontSize.largest))
+            .minimumScaleFactor(Constants.FontSize.scaleFactor)
+            .aspectRatio(1, contentMode: .fit)
+            .rotationEffect(.degrees(card.isMatched ? 360 : 0))
+            .animation(.spin(duration: 1).repeatForever(autoreverses: false), value: card.isMatched)
     }
 
     private enum Constants {
@@ -38,6 +48,12 @@ struct CardView: View {
             static let smallest: CGFloat = 10
             static let scaleFactor = smallest / largest
         }
+    }
+}
+
+extension Animation {
+    static func spin(duration: TimeInterval) -> Animation {
+        .linear(duration: duration)
     }
 }
 

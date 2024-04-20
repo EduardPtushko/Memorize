@@ -11,7 +11,7 @@ import SwiftUI
 struct RootView: View {
     @Environment(\.modelContext)
     private var modelContext
-    @Query(sort: \Theme.orderIndex)
+    @Query(sort: [SortDescriptor(\Theme.orderIndex), SortDescriptor(\Theme.name)])
     private var themes: [Theme]
 
     @State private var path = NavigationPath()
