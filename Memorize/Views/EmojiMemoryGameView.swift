@@ -22,13 +22,16 @@ struct EmojiMemoryGameView: View {
         VStack(spacing: 20.0) {
             cards
                 .foregroundStyle(viewModel.color)
-            deck
-                .foregroundStyle(viewModel.color)
+//            deck
+//                .foregroundStyle(viewModel.color)
+        }
+        .onAppear {
+            deal()
         }
         .navigationTitle(viewModel.theme.name.capitalized)
         .padding()
         .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
+            ToolbarItem(placement: .principal) {
                 Text("Score: \(viewModel.score)")
                     .animation(nil)
             }
